@@ -1,0 +1,9 @@
+curl http://ec2-13-126-34-139.ap-south-1.compute.amazonaws.com:6000/get_all_data
+
+curl http://ec2-13-126-34-139.ap-south-1.compute.amazonaws.com:6000/get_mpc/c42def5e-8c5b-11ea-b0e1-955813880946
+
+curl http://ec2-13-126-34-139.ap-south-1.compute.amazonaws.com:6000/get_participant/c42def5e-8c5b-11ea-b0e1-955813880946/1a34eb2c-8c58-11ea-afec-955813880946
+
+curl http://ec2-13-126-34-139.ap-south-1.compute.amazonaws.com:6000/get_all_events/c42def5e-8c5b-11ea-b0e1-955813880946
+
+curl -X DELETE http://ec2-13-126-34-139.ap-south-1.compute.amazonaws.com:6000/del_mpc/c42def5e-8c5b-11ea-b0e1-955813880946
