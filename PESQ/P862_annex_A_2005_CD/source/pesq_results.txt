@@ -1,0 +1,4 @@
+REFERENCE	 DEGRADED	 PESQMOS	 MOSLQO	 SAMPLE_FREQ	 MODE
+speak_man_3_to_compare_2.pcap_0.wav	 speak_man_3_to_compare.pcap_0.wav	 4.475	 4.534	 8000	nb
+B_leg_wav_0.wav	 speak_man_3_to_compare_2.pcap_0.wav	 0.159	 1.046	 8000	nb
+speak_man_3_to_compare_2.pcap_0.wav	 B_leg_wav_0.wav	 3.867	 4.013	 8000	nb
