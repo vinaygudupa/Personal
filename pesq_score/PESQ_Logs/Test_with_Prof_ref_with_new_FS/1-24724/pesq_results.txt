@@ -1,0 +1,2 @@
+REFERENCE	 DEGRADED	 PESQMOS	 MOSLQO	 SAMPLE_FREQ	 MODE
+/home/ubuntu/Vinay/ref_wav_file/MS_to_orig_45_95_jitter_ref.wav	 leg_audio.wav	 3.155	 3.053	 8000	nb

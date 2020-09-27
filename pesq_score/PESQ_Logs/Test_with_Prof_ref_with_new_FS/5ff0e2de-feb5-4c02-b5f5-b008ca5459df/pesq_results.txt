@@ -1,0 +1,2 @@
+REFERENCE	 DEGRADED	 PESQMOS	 MOSLQO	 SAMPLE_FREQ	 MODE
+/home/ubuntu/Vinay/ref_wav_file/MS_to_term_5_pct_packet_loss_ref.wav	 leg_audio.wav	 4.500	 4.549	 8000	nb

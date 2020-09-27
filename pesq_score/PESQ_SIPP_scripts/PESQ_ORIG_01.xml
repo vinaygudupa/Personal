@@ -1,0 +1,148 @@
+<?xml version=1.0 encoding=ISO-8859-1 ?>
+<!DOCTYPE scenario SYSTEM sipp.dtd>
+
+<scenario name=Client with regexp scenario>
+
+<send retrans="500">
+    <![CDATA[
+
+		INVITE sip:pesqterm28275765589238430354699@phone-qa.voice.plivodev.com SIP/2.0
+		Via: SIP/2.0/[transport] 54.241.31.18:[local_port];branch=[branch];rport
+		Max-Forwards: 70
+		Contact: <sip:pesqorig2032850456757491@54.241.31.18:[local_port];rinstance=61255d290530a2f1;transport=[transport]>
+		To: <sip:pesqterm28275765589238430354699@phone-qa.voice.plivodev.com>
+		From: "VINAY_TEST"<sip:pesqorig2032850456757491@phone-qa.voice.plivodev.com>;tag=fabc[call_number]f
+		Call-ID: [call_id]
+		CSeq: [cseq] INVITE
+		Allow: OPTIONS, SUBSCRIBE, NOTIFY, INVITE, ACK, CANCEL, BYE, REFER, INFO, MESSAGE
+		Content-Type: application/sdp
+		Supported: replaces
+		User-Agent: X-Lite release 5.5.0 stamp 97566
+		Content-Length: [len]
+
+		v=0
+		o=- 13196018077141168 1 IN IP4 54.241.31.18
+		s=X-Lite release 5.5.0 stamp 97566
+		c=IN IP4 54.241.31.18
+		t=0 0
+		m=audio [media_port] RTP/AVP 9 8 120 0 84 101
+		a=rtpmap:120 opus/48000/2
+		a=fmtp:120 useinbandfec=1; usedtx=1; maxaveragebitrate=64000
+		a=rtpmap:84 speex/16000
+		a=rtpmap:101 telephone-event/8000
+		a=fmtp:101 0-15
+		a=sendrecv
+    ]]>
+  </send>
+
+  <recv response="407" auth="true">
+  </recv>
+  
+    <send>
+    <![CDATA[
+
+		ACK sip:pesqterm28275765589238430354699@phone-qa.voice.plivodev.com SIP/2.0
+		Via: SIP/2.0/[transport] 54.241.31.18:[local_port];branch=[branch];rport
+		Max-Forwards: 70
+		[last_From:] 
+		[last_To:]
+		[last_Call-ID:]
+		CSeq: [cseq] ACK
+		Content-Length: 0
+    ]]>
+  </send>
+  
+ <send retrans="500">
+    <![CDATA[
+
+		INVITE sip:pesqterm28275765589238430354699@phone-qa.voice.plivodev.com SIP/2.0
+		Via: SIP/2.0/[transport] 54.241.31.18:[local_port];branch=[branch];rport
+		Max-Forwards: 70
+		Contact: <sip:pesqorig2032850456757491@54.241.31.18:[local_port];rinstance=61255d290530a2f1;transport=[transport]>
+		To: <sip:pesqterm28275765589238430354699@phone-qa.voice.plivodev.com>
+		From: "VINAY_TEST"<sip:pesqorig2032850456757491@phone-qa.voice.plivodev.com>;tag=fabc[call_number]f
+		Call-ID: [call_id]
+		[authentication username=pesqorig2032850456757491 password=plivo]
+		CSeq: [cseq] INVITE
+		Allow: OPTIONS, SUBSCRIBE, NOTIFY, INVITE, ACK, CANCEL, BYE, REFER, INFO, MESSAGE
+		Content-Type: application/sdp
+		Supported: replaces
+		User-Agent: X-Lite release 5.5.0 stamp 97566
+		Content-Length: [len]
+
+		v=0
+		o=- 13196018077141168 1 IN IP4 54.241.31.18
+		s=X-Lite release 5.5.0 stamp 97566
+		c=IN IP4 54.241.31.18
+		t=0 0
+		m=audio [media_port] RTP/AVP 9 8 120 0 84 101
+		a=rtpmap:120 opus/48000/2
+		a=fmtp:120 useinbandfec=1; usedtx=1; maxaveragebitrate=64000
+		a=rtpmap:84 speex/16000
+		a=rtpmap:101 telephone-event/8000
+		a=fmtp:101 0-15
+		a=sendrecv
+    ]]>
+  </send> 
+  
+      <recv response="100">
+	</recv>
+  
+    <recv response="183">
+	</recv>
+	
+	  <recv response="200" crlf="true">
+     <action>  
+	<ereg regexp="<(.*)>" search_in="hdr" header="Contact: " check_it="true" assign_to="dummy,3"/>
+	<ereg regexp=".*" search_in="hdr" header="Record-Route: " check_it="true" assign_to="4"/>
+	<ereg regexp=".*" search_in="hdr" header="To: " check_it="true" assign_to="5"/>
+     </action>
+  </recv>
+  <Reference variables="dummy,5" />
+  
+	  <send>
+    <![CDATA[
+
+		ACK [$3] SIP/2.0
+		Via: SIP/2.0/[transport] 54.241.31.18:[local_port];branch=[branch]2;rport
+		Max-Forwards: 70
+		Route: [$4]
+		[last_To:]
+		[last_From:]
+		[last_Call-ID:]
+		Contact: <sip:pesqorig2032850456757491@54.241.31.18:[local_port];rinstance=61255d290530a2f1;transport=[transport]>
+		CSeq: [cseq] ACK
+		User-Agent: X-Lite release 5.5.0 stamp 97566
+		Content-Length: 0
+
+    ]]>
+  </send>
+  
+
+  <pause milliseconds="2500" />
+   <nop>
+    <action>
+	    <exec play_pcap_audio="/home/ubuntu/Vinay_Test/PESQ/pcap/ORIG_1.pcap"/>
+    </action>
+  </nop>
+
+
+  <recv request="BYE">
+  </recv>
+
+  <send>
+    <![CDATA[
+
+      SIP/2.0 200 OK
+      [last_Via:]
+      [last_From:]
+      [last_To:];tag=[call_number]
+      [last_Call-ID:]
+      [last_CSeq:]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+
+    ]]>
+  </send>
+
+</scenario>

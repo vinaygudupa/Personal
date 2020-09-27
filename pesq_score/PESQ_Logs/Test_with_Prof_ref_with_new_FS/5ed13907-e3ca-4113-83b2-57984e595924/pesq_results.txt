@@ -1,0 +1,2 @@
+REFERENCE	 DEGRADED	 PESQMOS	 MOSLQO	 SAMPLE_FREQ	 MODE
+A_leg_audio.wav	 B_leg_audio.wav	 4.445	 4.515	 8000	nb
